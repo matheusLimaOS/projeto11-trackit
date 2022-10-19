@@ -3,13 +3,17 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../assets/logo.png"
 import {ThreeDots} from "react-loader-spinner"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 export default function PaginaLogin() {
     const [Button,setButton] = useState('Cadastrar');
+    let navigate = useNavigate();
+
     return (
         <ContainerPaginaLogin>
             <img src={logo} alt='TrackIt' />
-            <Formulario onSubmit={(e)=>{handleSubmit(e,setButton)}}>
+            <Formulario onSubmit={(e)=>{handleSubmit(e,setButton,navigate)}}>
                 <input type='text' placeholder="email" required disabled={Button === 'Cadastrar' ? false : true}></input>
                 <input type='password' placeholder="senha" required disabled={Button === 'Cadastrar' ? false : true}></input>
                 <input type='text' placeholder="nome" required disabled={Button === 'Cadastrar' ? false : true}></input>
@@ -21,7 +25,7 @@ export default function PaginaLogin() {
     )
 }
 
-function handleSubmit(e,setButton){
+function handleSubmit(e,setButton,navigate){
     e.preventDefault();
 
     setButton(
@@ -35,15 +39,24 @@ function handleSubmit(e,setButton){
         />
     )
 
-    // let usuario = {
-    //     email: e.target[0].value,
-    //     name: e.target[2].value,
-    //     Image: e.target[3].value,
-    //     password: e.target[1].value
-    // }
+    let promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up',
+    {
+        email: e.target[0].value,
+        name: e.target[2].value,
+        image: e.target[3].value,
+        password: e.target[1].value
+    });
 
+    promise.then(()=>{
+        navigate('/');
+    })
 
-    //let promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up',usuario)
+    promise.catch((error)=>{
+        console.log(error.response.data);
+        setButton('Cadastrar');
+        alert(error.response.data.details[0]);
+    })
+
 }
 
 const ContainerPaginaLogin = styled.div`
