@@ -1,18 +1,36 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../assets/logo.png"
+import {ThreeDots} from "react-loader-spinner"
 
 export default function PaginaLogin() {
+    const [Button,setButton] = useState('Entrar');
+
     return (
         <ContainerPaginaLogin>
             <img src={logo} alt='TrackIt' />
-            <Formulario>
-                <input type='text' placeholder="email"></input>
-                <input type='password' placeholder="senha"></input>
-                <button>Entrar</button>
+            <Formulario onSubmit={(e)=>{handleSubmit(e,setButton)}}>
+                <input type='text' placeholder="email" required disabled={Button === 'Entrar' ? false : true}></input>
+                <input type='password' placeholder="senha" required disabled={Button === 'Entrar' ? false : true}></input>
+                <button disabled={Button === 'Entrar' ? false : true}>{Button}</button>
                 <Link to={'/cadastro'}>Não tem uma conta? Cadastre-se!</Link>
             </Formulario>
         </ContainerPaginaLogin>
+    )
+}
+
+function handleSubmit(e,setButton){
+    e.preventDefault();
+    setButton(
+        <ThreeDots 
+            height="45" 
+            width="45" 
+            radius="9"
+            color="#FFFFFF" 
+            ariaLabel="three-dots-loading"
+            visible={true}
+        />
     )
 }
 
@@ -35,6 +53,13 @@ const Formulario = styled.form`
     display: flex;
     flex-direction: column;
     width: 80%;
+    button:disabled{
+        opacity: 0.7;
+    }
+    input:disabled{
+        background-color: #F2F2F2;
+        color: #D4D4D4;
+    }
     button{
         height: 45px;
         border: 0;
@@ -46,6 +71,9 @@ const Formulario = styled.form`
         font-size: 21px;
         font-weight: 400;
         margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     input{
         padding-left: 10px;
