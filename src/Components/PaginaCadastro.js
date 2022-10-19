@@ -9,8 +9,10 @@ export default function PaginaLogin() {
             <Formulario>
                 <input type='text' placeholder="email"></input>
                 <input type='password' placeholder="senha"></input>
-                <button>Entrar</button>
-                <Link to={'/cadastro'}>Não tem uma conta? Cadastre-se!</Link>
+                <input type='text' placeholder="nome"></input>
+                <input type='text' placeholder="foto"></input>
+                <button>Cadastrar</button>
+                <Link to={'/'}>Já tem uma conta? Faça login!</Link>
             </Formulario>
         </ContainerPaginaLogin>
     )

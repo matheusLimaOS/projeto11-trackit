@@ -1,6 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PaginaLogin from './Components/PaginaLogin'
+import PaginaCadastro from './Components/PaginaCadastro'
+
 
 export default function App() {
     return (
@@ -10,8 +12,8 @@ export default function App() {
                 {/* <Header/> */}
                 <Routes>
                     <Route path="/" element={<PaginaLogin/>}/>
-                    {/* <Route path="/sessoes/:idFilme" element={<Sessoes/>}/>
-                    <Route path="/assentos/:idSessao" element={<Assentos/>}/>
+                    <Route path="/cadastro" element={<PaginaCadastro/>}/>
+                    {/* <Route path="/assentos/:idSessao" element={<Assentos/>}/>
                     <Route path="/sucesso" element={<Sucesso/>}/> */}
                 </Routes>
             </BrowserRouter>
