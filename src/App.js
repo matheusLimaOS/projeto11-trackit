@@ -2,21 +2,23 @@ import { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PaginaLogin from './Components/PaginaLogin'
 import PaginaCadastro from './Components/PaginaCadastro'
+import { AuthProvider } from "./Providers/Auth";
 
 
 export default function App() {
     return (
         <>
-            <GlobalStyle/>  
-            <BrowserRouter>
-                {/* <Header/> */}
-                <Routes>
-                    <Route path="/" element={<PaginaLogin/>}/>
-                    <Route path="/cadastro" element={<PaginaCadastro/>}/>
-                    {/* <Route path="/assentos/:idSessao" element={<Assentos/>}/>
-                    <Route path="/sucesso" element={<Sucesso/>}/> */}
-                </Routes>
-            </BrowserRouter>
+            <AuthProvider>
+                <GlobalStyle/>  
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<PaginaLogin/>}/>
+                        <Route path="/cadastro" element={<PaginaCadastro/>}/>
+                        {/* <Route path="/assentos/:idSessao" element={<Assentos/>}/>
+                        <Route path="/sucesso" element={<Sucesso/>}/> */}
+                    </Routes>
+                </BrowserRouter>
+            </AuthProvider>
         </>
         
     )

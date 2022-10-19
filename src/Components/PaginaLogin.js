@@ -1,16 +1,21 @@
+import React from "react"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../assets/logo.png"
 import {ThreeDots} from "react-loader-spinner"
+import { AuthContext } from "../Providers/Auth"
+import axios from "axios"
 
 export default function PaginaLogin() {
     const [Button,setButton] = useState('Entrar');
+    let {setUser} = React.useContext(AuthContext);
+    let navigate = useNavigate();
 
     return (
         <ContainerPaginaLogin>
             <img src={logo} alt='TrackIt' />
-            <Formulario onSubmit={(e)=>{handleSubmit(e,setButton)}}>
+            <Formulario onSubmit={(e)=>{handleSubmit(e,navigate,setButton,setUser)}}>
                 <input type='text' placeholder="email" required disabled={Button === 'Entrar' ? false : true}></input>
                 <input type='password' placeholder="senha" required disabled={Button === 'Entrar' ? false : true}></input>
                 <button disabled={Button === 'Entrar' ? false : true}>{Button}</button>
@@ -20,7 +25,7 @@ export default function PaginaLogin() {
     )
 }
 
-function handleSubmit(e,setButton){
+function handleSubmit(e,navigate,setButton,setUser){
     e.preventDefault();
     setButton(
         <ThreeDots 
@@ -32,6 +37,27 @@ function handleSubmit(e,setButton){
             visible={true}
         />
     )
+    
+    let promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',
+    {
+        email:e.target[0].value,
+        password:e.target[1].value
+    });
+
+    promise.then((response)=>{
+        setUser({
+            name: response.data.name,
+            image: response.data.image,
+            token: response.data.token
+        })
+        navigate('/cadastro');
+    });
+
+    promise.catch((error)=>{
+        setButton('Entrar');
+        alert(error.response.data.message);
+    })
+
 }
 
 const ContainerPaginaLogin = styled.div`
