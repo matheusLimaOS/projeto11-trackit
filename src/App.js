@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PaginaLogin from './Components/PaginaLogin'
 import PaginaCadastro from './Components/PaginaCadastro'
 import { AuthProvider } from "./Providers/Auth";
+import Historico from "./Components/Historico";
 
 
 export default function App() {
@@ -14,8 +15,8 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={<PaginaLogin/>}/>
                         <Route path="/cadastro" element={<PaginaCadastro/>}/>
-                        {/* <Route path="/assentos/:idSessao" element={<Assentos/>}/>
-                        <Route path="/sucesso" element={<Sucesso/>}/> */}
+                        <Route path="/historico" element={<Historico/>}/>
+                        {/* <Route path="/sucesso" element={<Sucesso/>}/> */}
                     </Routes>
                 </BrowserRouter>
             </AuthProvider>

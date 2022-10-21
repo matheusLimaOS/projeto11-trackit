@@ -50,7 +50,7 @@ function handleSubmit(e,navigate,setButton,setUser){
             image: response.data.image,
             token: response.data.token
         })
-        navigate('/cadastro');
+        navigate('/historico');
     });
 
     promise.catch((error)=>{
