@@ -8,9 +8,14 @@ export function AuthProvider(props) {
         image: '',
         token: ''
     })
+    let [habitosHoje,setHabitosHoje] = useState([]);
+    let [habitos,setHabitos] = useState([]);
+    const [hoje,setHoje] = useState({
+        percentage: 0,
+    })
 
     return(
-        <AuthContext.Provider value={{user,setUser}}>
+        <AuthContext.Provider value={{user,setUser,hoje,setHoje,habitosHoje,setHabitosHoje,habitos,setHabitos}}>
             {props.children}
         </AuthContext.Provider>
         

@@ -2,26 +2,31 @@ import styled from "styled-components"
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Link } from "react-router-dom";
+import React from "react";
+import { AuthContext } from "../Providers/Auth";
 
 export default function PaginaLogin() {
+    let {hoje} = React.useContext(AuthContext);
     return (
         <ContainerFooter>
-            <LinkHabitos>Hábitos</LinkHabitos>
+            <LinkHabitos data-identifier="habit-page-action" to="/habitos">Hábitos</LinkHabitos>
             <div>
-                <CircularProgressbar 
-                    value={66} 
-                    text={'Hoje'} 
-                    background={true}
-                    backgroundPadding={8}
-                    styles={buildStyles({
-                        pathColor: `#FFFFFF`,
+                <Link to='/hoje'>
+                    <CircularProgressbar
+                        value={hoje.percentage}
+                        text={'Hoje'}
+                        background={true}
+                        backgroundPadding={8}
+                        styles={buildStyles({
+                            pathColor: `#FFFFFF`,
                             textColor: '#FFFFFF',
                             trailColor: '#52B6FF',
                             backgroundColor: '#52B6FF',
-                    })}
-                />
+                        })}
+                    />
+                </Link>
             </div>
-            <LinkHistorico>Histórico</LinkHistorico>
+            <LinkHistorico to='/historico' data-identifier="historic-page-action">Histórico</LinkHistorico>
         </ContainerFooter>
     )
 }
@@ -31,11 +36,11 @@ const ContainerFooter = styled.div`
     background: #FFFFFF;
     display: flex;
     position: absolute;
-    bottom: 0;
     left: 0;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    bottom: 0;  
     & > div{
         position: absolute;
         top: -40px;

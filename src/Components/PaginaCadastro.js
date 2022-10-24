@@ -14,12 +14,12 @@ export default function PaginaLogin() {
         <ContainerPaginaLogin>
             <img src={logo} alt='TrackIt' />
             <Formulario onSubmit={(e)=>{handleSubmit(e,setButton,navigate)}}>
-                <input type='text' placeholder="email" required disabled={Button === 'Cadastrar' ? false : true}></input>
-                <input type='password' placeholder="senha" required disabled={Button === 'Cadastrar' ? false : true}></input>
-                <input type='text' placeholder="nome" required disabled={Button === 'Cadastrar' ? false : true}></input>
-                <input type='text' placeholder="foto" required disabled={Button === 'Cadastrar' ? false : true}></input>
+                <input data-identifier="input-email" type='text' placeholder="email" required disabled={Button === 'Cadastrar' ? false : true}></input>
+                <input data-identifier="input-password" type='password' placeholder="senha" required disabled={Button === 'Cadastrar' ? false : true}></input>
+                <input data-identifier="input-name" type='text' placeholder="nome" required disabled={Button === 'Cadastrar' ? false : true}></input>
+                <input data-identifier="input-photo" type='text' placeholder="foto" required disabled={Button === 'Cadastrar' ? false : true}></input>
                 <button disabled={Button === 'Cadastrar' ? false : true}>{Button}</button>
-                <Link to={'/'}>Já tem uma conta? Faça login!</Link>
+                <Link data-identifier="back-to-login-action" to={'/'}>Já tem uma conta? Faça login!</Link>
             </Formulario>
         </ContainerPaginaLogin>
     )

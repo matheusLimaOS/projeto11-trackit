@@ -4,7 +4,8 @@ import PaginaLogin from './Components/PaginaLogin'
 import PaginaCadastro from './Components/PaginaCadastro'
 import { AuthProvider } from "./Providers/Auth";
 import Historico from "./Components/Historico";
-
+import Hoje from "./Components/Hoje";
+import Habitos from "./Components/Habitos";
 
 export default function App() {
     return (
@@ -16,7 +17,8 @@ export default function App() {
                         <Route path="/" element={<PaginaLogin/>}/>
                         <Route path="/cadastro" element={<PaginaCadastro/>}/>
                         <Route path="/historico" element={<Historico/>}/>
-                        {/* <Route path="/sucesso" element={<Sucesso/>}/> */}
+                        <Route path="/habitos" element={<Habitos/>}/>
+                        <Route path="/hoje" element={<Hoje/>}/>
                     </Routes>
                 </BrowserRouter>
             </AuthProvider>

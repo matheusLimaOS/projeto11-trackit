@@ -16,10 +16,10 @@ export default function PaginaLogin() {
         <ContainerPaginaLogin>
             <img src={logo} alt='TrackIt' />
             <Formulario onSubmit={(e)=>{handleSubmit(e,navigate,setButton,setUser)}}>
-                <input type='text' placeholder="email" required disabled={Button === 'Entrar' ? false : true}></input>
-                <input type='password' placeholder="senha" required disabled={Button === 'Entrar' ? false : true}></input>
-                <button disabled={Button === 'Entrar' ? false : true}>{Button}</button>
-                <Link to={'/cadastro'}>Não tem uma conta? Cadastre-se!</Link>
+                <input data-identifier="input-email" type='text' placeholder="email" required disabled={Button === 'Entrar' ? false : true}></input>
+                <input data-identifier="input-password" type='password' placeholder="senha" required disabled={Button === 'Entrar' ? false : true}></input>
+                <button data-identifier="login-btn" disabled={Button === 'Entrar' ? false : true}>{Button}</button>
+                <Link data-identifier="sign-up-action" to={'/cadastro'}>Não tem uma conta? Cadastre-se!</Link>
             </Formulario>
         </ContainerPaginaLogin>
     )
@@ -50,7 +50,7 @@ function handleSubmit(e,navigate,setButton,setUser){
             image: response.data.image,
             token: response.data.token
         })
-        navigate('/historico');
+        navigate('/hoje');
     });
 
     promise.catch((error)=>{

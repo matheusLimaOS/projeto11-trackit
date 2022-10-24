@@ -8,7 +8,7 @@ export default function Header() {
     return (
         <ContainerHeader>
             <img src={logo} alt='trackIt'/>
-            <ImgUser src={user.image} alt='Usuario'/>
+            <ImgUser data-identifier="avatar" src={user.image} alt='Usuario'/>
         </ContainerHeader>
     )
 }
