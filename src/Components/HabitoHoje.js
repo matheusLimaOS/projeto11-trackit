@@ -34,7 +34,6 @@ export default function HabitoHoje(props){
 }
 
 function handleClick(habito,user,index,habitosHoje,setHabitosHoje){
-    console.log(habito);
     let promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habito.id}/check`,undefined
     ,{
         headers: {
@@ -60,6 +59,7 @@ const ContainerHabito = styled.div`
     justify-content: space-between;
     background-color: white;
     align-items: center;
+    margin-bottom: 20px;
 `
 
 const Botao = styled.button`

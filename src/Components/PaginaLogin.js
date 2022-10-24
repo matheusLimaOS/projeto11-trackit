@@ -62,6 +62,7 @@ function handleSubmit(e,navigate,setButton,setUser){
 
 const ContainerPaginaLogin = styled.div`
     display:flex;
+    background-color: white;
     flex-direction: column;
     justify-content: center;
     width: 100%;

@@ -126,7 +126,7 @@ function handleClick(selecionados,setSelecionados,i){
 
 const ContainerPaginaHabitos = styled.div`
     background-color: #F2F2F2;
-    height: 100%;
+    height: calc(100vh - 70px);
     padding: 0px 20px;
     display: flex;
     flex-direction: column;

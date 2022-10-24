@@ -35,7 +35,6 @@ export default function Hoje() {
             });
             let percentage = ((conc/(Nconc+conc))*100).toFixed(0);
             setHoje({percentage:percentage});
-
             setHabitosHoje(response.data);
         })
         promise.catch(()=>{
