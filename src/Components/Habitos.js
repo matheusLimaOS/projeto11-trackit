@@ -8,9 +8,10 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AddOutline } from "react-ionicons";
 import Habito from "./Habito";
-
+import {ThreeDots} from "react-loader-spinner"
 
 export default function Habitos(){
+    const [Button,setButton] = useState('Salvar');
     let {user,habitos,setHabitos} = React.useContext(AuthContext);
     let navigate = useNavigate();
     let days = ['D','S','T','Q','Q','S','S'];
@@ -41,19 +42,19 @@ export default function Habitos(){
                     <h1>Meus hábitos</h1>
                     <button data-identifier="create-habit-btn" onClick={()=>setAdd(true)}><AddOutline color="white"/></button>
                 </ContainerTexto>
-                <Formulario onSubmit={(event)=>{handleSubmit(event,selecionados,setSelecionados,setAdd,user,habitos,setHabitos,input,setInput)}} mostrar={add}>
-                    <input onChange={(e)=>{setInput(e.target.value)}} value={input} required data-identifier="input-habit-name" type='text' placeholder="nome do hábito"/>
+                <Formulario onSubmit={(event)=>{handleSubmit(event,selecionados,setSelecionados,setAdd,user,habitos,setHabitos,input,setInput,setButton)}} mostrar={add}>
+                    <input disabled={Button === 'Salvar' ? false : true} onChange={(e)=>{setInput(e.target.value)}} value={input} required data-identifier="input-habit-name" type='text' placeholder="nome do hábito"/>
                     <Botoes>
                         {days.map((day,i)=>{
-                            return <Botao data-identifier="week-day-btn" type="button" onClick={()=>{handleClick(selecionados,setSelecionados,i)}} key={i} cor={selecionados.includes(i)}>{day}</Botao>
+                            return <Botao disabled={Button === 'Salvar' ? false : true} data-identifier="week-day-btn" type="button" onClick={()=>{handleClick(selecionados,setSelecionados,i)}} key={i} cor={selecionados.includes(i)}>{day}</Botao>
                         })}
                     </Botoes>
                     <ContainerBotoes>
                         <BotaoCancelar data-identifier="cancel-habit-create-btn" type="button" onClick={()=>{setAdd(false)}}>
                             Cancelar
                         </BotaoCancelar>
-                        <BotaoSalvar data-identifier="save-habit-create-btn" type="submit">
-                            Salvar
+                        <BotaoSalvar data-identifier="save-habit-create-btn" disabled={Button === 'Salvar' ? false : true} type="submit">
+                            {Button}
                         </BotaoSalvar>
                     </ContainerBotoes>
 
@@ -70,8 +71,18 @@ export default function Habitos(){
     )
 }
 
-function handleSubmit(e,selecionados,setSelecionados,setAdd,user,habitos,setHabitos,input,setInput){
+function handleSubmit(e,selecionados,setSelecionados,setAdd,user,habitos,setHabitos,input,setInput,setButton){
     e.preventDefault();
+    setButton(
+        <ThreeDots 
+            height="45" 
+            width="45" 
+            radius="9"
+            color="#FFFFFF" 
+            ariaLabel="three-dots-loading"
+            visible={true}
+        />
+    )
     let obj = {
         name: input,
         days: selecionados
@@ -89,6 +100,10 @@ function handleSubmit(e,selecionados,setSelecionados,setAdd,user,habitos,setHabi
         setSelecionados([]);
         setInput('');
         setAdd(false);
+        setButton('Salvar');
+    })
+    promise.catch(()=>{
+        setButton('Salvar');
     })
 }
 
@@ -158,6 +173,13 @@ const Formulario = styled.form`
     width: 100%;
     position: relative;
     margin-bottom: 20px;
+    button:disabled{
+        opacity: 0.7;
+    }
+    input:disabled{
+        background-color: #F2F2F2;
+        color: #D4D4D4;
+    }
     > input{
         padding-left: 15px;
         margin: 20px 15px 5px 15px;

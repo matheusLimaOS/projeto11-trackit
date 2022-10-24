@@ -35,7 +35,7 @@ const ContainerFooter = styled.div`
     height: 70px;
     background: #FFFFFF;
     display: flex;
-    position: absolute;
+    position: fixed;
     left: 0;
     justify-content: space-between;
     align-items: center;
